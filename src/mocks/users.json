@@ -1,0 +1,32 @@
+[
+  {
+    "id": "dimas",
+    "name": "Dimas",
+    "role": ["jadwal", "keluarga"],
+    "password": "dimas123"
+  },
+  {
+    "id": "randy",
+    "name": "Randy",
+    "role": ["form_unik", "formula"],
+    "password": "randy123"
+  },
+  {
+    "id": "adlan",
+    "name": "Adlan",
+    "role": ["form_canggih", "tabel"],
+    "password": "adlan123"
+  },
+  {
+    "id": "kikoadmn",
+    "name": "Kiko",
+    "role": ["admin"],
+    "password": "kikoadmn"
+  },
+  {
+    "id": "dummy",
+    "name": "Dummy",
+    "role": [],
+    "password": "dummy123"
+  }
+]
