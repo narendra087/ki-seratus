@@ -1,11 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route, Link } from "react-router-dom"
+
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import PageNotFound from './pages/PageNotFound';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Ki Seratus App</h1>
+      <Routes>
+        <Route path="/" element={ <Login/> } />
+        <Route path="dashboard" element={ <Dashboard/> } />
+        
+        {/* 404 - Page not found */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </div>
   );
 }
