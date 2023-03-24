@@ -1,5 +1,8 @@
 import React from 'react';
-import { Routes, Route, Link } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
+
+import LoginRoute from './components/route/LoginRoute';
+import PrivateRoute from './components/route/PrivateRoute';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -11,8 +14,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={ <Login/> } />
-        <Route path="dashboard" element={ <Dashboard/> } />
+        <Route path='/' element={ <LoginRoute /> }>
+          <Route path="" element={ <Login/> } />
+        </Route>
+        
+        <Route path="/dashboard" element={ <PrivateRoute/> }>
+          <Route path="" element={<Dashboard />} />
+        </Route>
         
         {/* 404 - Page not found */}
         <Route path="*" element={<PageNotFound />} />
