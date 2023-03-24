@@ -16,8 +16,10 @@ import {
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 
-import users from '../mocks/users.json'
+import { useSelector, useDispatch } from 'react-redux'
+import { setUser } from '../redux/slices/userSlice';
 
+import users from '../mocks/users.json'
 import { ReactComponent as Wave } from '../assets/wave.svg'
 
 import '../components/login.css'
@@ -33,6 +35,7 @@ interface FormProps {
 }
 
 const Login = () => {
+  const dispatch = useDispatch()
   const toast = useToast()
   const navigate = useNavigate()
   const loginForm = useFormik({
@@ -63,6 +66,7 @@ const Login = () => {
       if (users[indexUser].password === password) {
         if (users[indexUser].role.length !== 0) {
           showToast({msg: 'Berhasil login', status: 'success'})
+          dispatch(setUser(users[indexUser]))
           navigate('dashboard')
         } else {
           showToast({msg: 'Akun belum memiliki peran', status: 'error'})

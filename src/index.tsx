@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './redux/store';
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
@@ -37,11 +40,15 @@ const theme = extendTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-    </Router>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <ChakraProvider theme={theme}>
+              <App />
+          </ChakraProvider>
+        </Router>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
