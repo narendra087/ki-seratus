@@ -1,8 +1,22 @@
 import React from 'react'
 
-const Layout = ({children}: any) => {
+import Header from './header/Header'
+import Sidebar from './sidebar/Sidebar'
+
+import { Outlet } from 'react-router-dom'
+import { Flex } from '@chakra-ui/react'
+
+const Layout = () => {
   return (
-    <div>Layout</div>
+    <>
+      <Header />
+      <Flex w='100%' className="body-container">
+        <Sidebar />
+        <main>
+          <Outlet />
+        </main>
+      </Flex>
+    </>
   )
 }
 

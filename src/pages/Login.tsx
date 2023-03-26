@@ -65,7 +65,7 @@ const Login = () => {
     if (indexUser !== -1) {
       if (users[indexUser].password === password) {
         if (users[indexUser].role.length !== 0) {
-          showToast({msg: 'Berhasil login', status: 'success'})
+          // showToast({msg: 'Berhasil login', status: 'success'})
           dispatch(setUser(users[indexUser]))
           navigate('dashboard')
         } else {
