@@ -2,30 +2,35 @@
   {
     "id": "dimas",
     "name": "Dimas",
+    "roleName": "Tukang Jadwal & Keluarga",
     "role": ["jadwal", "keluarga"],
     "password": "dimas123"
   },
   {
     "id": "randy",
     "name": "Randy",
+    "roleName": "Tukang Formula Unik",
     "role": ["form_unik", "formula"],
     "password": "randy123"
   },
   {
     "id": "adlan",
     "name": "Adlan",
+    "roleName": "Tukang Form & Tabel",
     "role": ["form_canggih", "tabel"],
     "password": "adlan123"
   },
   {
     "id": "kikoadmn",
     "name": "Kiko",
+    "roleName": "Superadmin",
     "role": ["admin"],
     "password": "kikoadmn"
   },
   {
     "id": "dummy",
     "name": "Dummy",
+    "roleName": "",
     "role": [],
     "password": "dummy123"
   }
