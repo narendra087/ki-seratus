@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import thunk from 'redux-thunk';
 
 import userReducer from './slices/userSlice'
+import calendarReducer from "./slices/calendarSlice";
 
 const persistConfig = {
   key: 'root',
@@ -14,6 +15,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   user: userReducer,
+  calendar: calendarReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer)
