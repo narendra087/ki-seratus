@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom"
 import LoginRoute from './components/route/LoginRoute';
 import PrivateRoute from './components/route/PrivateRoute';
 
+import Layout from './components/layout/Layout';
+
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import PageNotFound from './pages/PageNotFound';
@@ -18,8 +20,10 @@ function App() {
           <Route path="" element={ <Login/> } />
         </Route>
         
-        <Route path="/dashboard" element={ <PrivateRoute/> }>
-          <Route path="" element={<Dashboard />} />
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={ <PrivateRoute/> }>
+            <Route path="" element={<Dashboard />} />
+          </Route>
         </Route>
         
         {/* 404 - Page not found */}

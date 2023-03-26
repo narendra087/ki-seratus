@@ -10,13 +10,11 @@ import {
   useToast,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   VStack,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUser } from '../redux/slices/userSlice';
 
 import users from '../mocks/users.json'
@@ -65,7 +63,7 @@ const Login = () => {
     if (indexUser !== -1) {
       if (users[indexUser].password === password) {
         if (users[indexUser].role.length !== 0) {
-          showToast({msg: 'Berhasil login', status: 'success'})
+          // showToast({msg: 'Berhasil login', status: 'success'})
           dispatch(setUser(users[indexUser]))
           navigate('dashboard')
         } else {
@@ -83,7 +81,7 @@ const Login = () => {
     <div className='login'>
       <Center maxW='lg' w='full' zIndex='1' boxShadow='xl'>
         <Box maxW='lg' w='full' borderRadius='lg' bg='primary.100' bgGradient="linear(to-br, primary.100, primary.200)" p='30px'>
-          <Text fontSize='4xl' fontWeight='bold'>Q100</Text>
+          <Text fontSize='4xl' fontWeight='bold'>Q100+</Text>
           <Divider borderColor='primary.400' my='20px' />
           <Box w='full'>
             <Text fontSize='2xl' fontWeight='bold' my='20px'>Login to your account</Text>
