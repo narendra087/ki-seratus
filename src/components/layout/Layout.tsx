@@ -84,7 +84,7 @@ const Layout = () => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p="4" minH="calc(100vh - 80px)">
         <Outlet />
       </Box>
     </Box>
