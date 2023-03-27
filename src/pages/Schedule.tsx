@@ -6,16 +6,14 @@ import interactionPlugin from "@fullcalendar/interaction"
 import {
   Flex,
   Text,
-  Icon,
   useDisclosure,
 } from '@chakra-ui/react'
-import { BiXCircle } from 'react-icons/bi'
 
 import FormScheduleModal from '../components/modals/FormScheduleModal'
 import DeleteScheduleModal from '../components/modals/DeleteScheduleModal'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addEvent, removeEvent } from '../redux/slices/calendarSlice'
+import { addEvent, editEvent, removeEvent } from '../redux/slices/calendarSlice'
 
 const Schedule = () => {
   const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure()
@@ -36,7 +34,6 @@ const Schedule = () => {
           p={'4px 8px'}
         >
           <Text>{eventInfo.event.title}</Text>
-          <Icon as={BiXCircle} />
         </Flex>
       </>
     )
@@ -44,14 +41,17 @@ const Schedule = () => {
   
   const handleModalOpen = (modal: string) => {
     setModal(modal)
-    if (modal === 'add') return onFormOpen()
-    if (modal === 'delete') return onDeleteOpen()
+    onFormOpen()
+  }
+  
+  const showDeleteModal = () => {
+    onFormClose()
+    onDeleteOpen()
   }
   
   const handleDateSelect = (selectInfo: any) => {
     let calendarApi = selectInfo.view.calendar
     calendarApi.unselect()
-    console.log(selectInfo)
 
     setSelectedEvent(selectInfo)
     handleModalOpen('add')
@@ -69,7 +69,19 @@ const Schedule = () => {
       calendarApi.addEvent(data)
       dispatch(addEvent(data))
     }
+    onFormClose()
+  }
     
+  const handleUpdateEvent = (title: string) => {
+    if (title) {
+      selectedEvent?.event?.setProp('title', title)
+      
+      const data = {
+        id: selectedEvent?.event?.id,
+        title,
+      }
+      dispatch(editEvent(data))
+    }
     onFormClose()
   }
   
@@ -111,6 +123,8 @@ const Schedule = () => {
           type={openModal}
           selectedEvent={selectedEvent}
           handleAddEvent={handleAddEvent}
+          showDeleteModal={showDeleteModal}
+          handleUpdateEvent={handleUpdateEvent}
         />
       }
       {
