@@ -12,10 +12,15 @@ export const calendarSlice = createSlice({
       state.events.push(action.payload)
     },
     editEvent: (state, action) => {
-      console.log(action.payload)
+      console.log('edit', action.payload)
     },
     removeEvent: (state, action) => {
-      console.log(action.payload)
+      if (action.payload) {
+        const indexEvent = state.events.findIndex((ev:any) => ev.id === Number(action.payload))
+        if (indexEvent !== -1) {
+          state.events.splice(indexEvent, 1)
+        }
+      }
     },
   }
 })

@@ -5,17 +5,21 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
 import {
   Flex,
-  Button,
   Text,
+  Icon,
   useDisclosure,
 } from '@chakra-ui/react'
+import { BiXCircle } from 'react-icons/bi'
 
 import FormScheduleModal from '../components/modals/FormScheduleModal'
+import DeleteScheduleModal from '../components/modals/DeleteScheduleModal'
+
 import { useDispatch, useSelector } from 'react-redux'
-import { addEvent } from '../redux/slices/calendarSlice'
+import { addEvent, removeEvent } from '../redux/slices/calendarSlice'
 
 const Schedule = () => {
   const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure()
+  const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
   const [openModal, setModal] = useState('')
   const [selectedEvent, setSelectedEvent] = useState<any>(null)
   const dispatch = useDispatch()
@@ -24,8 +28,16 @@ const Schedule = () => {
   const renderEventContent = (eventInfo: any) => {
     return (
       <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
+        <Flex
+          bg='primary.400'
+          color='white'
+          justifyContent='space-between'
+          alignItems='center'
+          p={'4px 8px'}
+        >
+          <Text>{eventInfo.event.title}</Text>
+          <Icon as={BiXCircle} />
+        </Flex>
       </>
     )
   }
@@ -33,6 +45,7 @@ const Schedule = () => {
   const handleModalOpen = (modal: string) => {
     setModal(modal)
     if (modal === 'add') return onFormOpen()
+    if (modal === 'delete') return onDeleteOpen()
   }
   
   const handleDateSelect = (selectInfo: any) => {
@@ -61,13 +74,14 @@ const Schedule = () => {
   }
   
   const handleEventClick = (clickInfo:any) => {
-    if (window.confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
-    }
+    setSelectedEvent(clickInfo)
+    handleModalOpen('delete')
   }
   
-  const handleEvents = (events:any) => {
-    // setEvents(events)
+  const handleDeleteEvent = () => {
+    selectedEvent?.event?.remove()
+    dispatch(removeEvent(selectedEvent?.event?.id || undefined))
+    onDeleteClose()
   }
   
   return (
@@ -87,7 +101,6 @@ const Schedule = () => {
         dayMaxEvents={true}
         select={handleDateSelect}
         eventClick={handleEventClick}
-        eventsSet={handleEvents}
       />
       
       { isFormOpen &&
@@ -98,6 +111,16 @@ const Schedule = () => {
           type={openModal}
           selectedEvent={selectedEvent}
           handleAddEvent={handleAddEvent}
+        />
+      }
+      {
+        isDeleteOpen &&
+        <DeleteScheduleModal
+          isOpen={isDeleteOpen}
+          onOpen={onDeleteOpen}
+          onClose={onDeleteClose}
+          selectedEvent={selectedEvent}
+          handleDeleteEvent={handleDeleteEvent}
         />
       }
     </div>
