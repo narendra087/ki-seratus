@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  event: null,
+const initialState:any = {
+  events: [],
 }
 
 export const calendarSlice = createSlice({
@@ -9,7 +9,7 @@ export const calendarSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action) => {
-      state.event = action.payload
+      state.events.push(action.payload)
     },
     editEvent: (state, action) => {
       console.log(action.payload)
