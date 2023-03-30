@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
 import Family from './pages/Family';
+import AdvancedForm from './pages/AdvancedForm';
 
 import PageNotFound from './pages/PageNotFound';
 
@@ -32,6 +33,10 @@ function App() {
           </Route>
           <Route path="/family" element={ <PrivateRoute/> }>
             <Route path="" element={<Family />} />
+          </Route>
+          
+          <Route path="/advanced-form" element={ <PrivateRoute/> }>
+            <Route path="" element={<AdvancedForm />} />
           </Route>
         </Route>
         
