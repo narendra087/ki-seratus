@@ -9,6 +9,8 @@ import Layout from './components/layout/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Schedule from './pages/Schedule';
+import Family from './pages/Family';
+
 import PageNotFound from './pages/PageNotFound';
 
 import './App.css';
@@ -27,6 +29,9 @@ function App() {
           </Route>
           <Route path="/schedule" element={ <PrivateRoute/> }>
             <Route path="" element={<Schedule />} />
+          </Route>
+          <Route path="/family" element={ <PrivateRoute/> }>
+            <Route path="" element={<Family />} />
           </Route>
         </Route>
         
